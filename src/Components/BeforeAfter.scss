@@ -1,0 +1,62 @@
+.code-comparison-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .flexx {
+    display: flex; 
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .comparison-title {
+    color: whitesmoke;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 120px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    text-align: center;
+    padding: 0;
+    margin: 20px 0;
+  }
+  
+  .code-example {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 48%; 
+  }
+  .code-third {
+    border: 1px solid #ccc;
+    padding: 20px 20px 0px 20px;
+   
+    border-radius: 5px;
+    margin-bottom: 50px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%; 
+  }
+  
+  
+  .code-editor {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 48%; 
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    font-size: 18px;
+  }
+  
+  p {
+    margin-bottom: 20px;
+  }
+  
+
+  
