@@ -245,19 +245,17 @@ const BigProject: React.FC = () => {
         {isLoading ? (
           <div className="loading-indicator">Loading...</div>
         ) : (
-          <div className="content">
+          <div className="contentbig">
             {activeStep === steps.length ? (
               <div className="result">
                 <h2 style={{ color: 'white' }}>Your total score: {score}</h2>
               </div>
             ) : (
-              <div className="content">
+              <div className="contentbig">
                 <p className="step-label">
                   Step {activeStep + 1}: {steps[activeStep]}
                 </p>
-                <button className="next-button" onClick={handleNext}>
-                  {activeStep === steps.length - 1 ? 'Check Code' : 'Next'}
-                </button>
+               
                 {activeStep === 0 && (
                   <>
                     <button className="show-tips-button" onClick={handleShowTips}>

@@ -23,7 +23,7 @@ const FiveExercises: React.FC = () => {
     const newValues = [...editorValues];
     newValues[index] = value;
     setEditorValues(newValues);
-    console.log('Editor Values:', newValues);
+     console.log('Editor Values:', newValues);
   };
 
   
