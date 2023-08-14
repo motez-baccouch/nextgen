@@ -7,7 +7,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import CodeIcon from '@mui/icons-material/Code';
 
 const BigProject: React.FC = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  var [activeStep, setActiveStep] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [score, setScore] = useState(0);
   const [isTipsVisible, setIsTipsVisible] = useState(false);
@@ -202,8 +202,22 @@ const BigProject: React.FC = () => {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[0] = true;
-
             console.log('Step 0 marked as completed');
+            console.log(activeStep)
+            
+            return updatedSteps;
+          });
+          activeStep++
+        }
+        break;
+        case 1: // Check for the first step
+        console.log('Checking step 1 code:', code);
+        if (code.includes('hahaha')) {
+          setCompletedSteps(prevCompletedSteps => {
+            const updatedSteps = [...prevCompletedSteps];
+            updatedSteps[1] = true;
+
+            console.log('Step 1 marked as completed');
             return updatedSteps;
           });
         }
