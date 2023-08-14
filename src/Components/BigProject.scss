@@ -1,0 +1,206 @@
+.big-project-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .project-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    height: 1150px;
+    width: 1400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .steps-container {
+    display: flex;
+    margin-top: 20px;
+  }
+  .Toastify__progress-bar--purple {
+    background: purple;
+  }
+  .tip-checkbox {
+    cursor: pointer;
+  }
+  .step-checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    position: relative;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .step-checkbox:checked {
+    background-color: #2196f3;
+    border-color: #2196f3;
+  }
+  
+  .step-checkbox:after {
+    content: '\2713';
+    font-size: 16px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .step-checkbox:checked:after {
+    opacity: 1;
+  }
+  
+  .step-checkbox:hover {
+    background-color: #ccc;
+  }
+  .custom-toast {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  .step {
+    flex: 1;
+    padding: 5px;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .step.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .loading-indicator {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .content {
+    margin-top: 20px;
+  }
+  
+  .step-label {
+    font-weight: bold;
+  }
+  
+  .next-button,
+  .optimize-button {
+    display: block;
+    margin-top: 35%;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    margin-left: 50%;
+    cursor: pointer;
+  }
+  
+  .optimize-button {
+    background-color: #dc3545;
+    margin-left: 10px;
+  }
+  
+  .result {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .show-tips-button {
+    display: block;
+    margin-top: -40%;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    margin-left: 86%;
+    cursor: pointer;
+  }
+  
+  .tips-and-tricks-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .tips-and-tricks {
+    margin-top: 0px;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow-x: auto;
+    white-space: nowrap;
+    z-index: 1000;
+    max-width: 849px;
+    height: 50%;
+    overflow-x: hidden;
+
+  }
+  
+  .carousel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 10px;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    width: 100%;
+    overflow-y: hidden;
+    box-sizing: border-box;
+  }
+  
+  .carousel::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .tip {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 123px;
+    margin-right: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+    p {
+      margin-bottom: 10px;
+    }
+  
+    img {
+        height: 300px;
+        border-radius: 30px;
+        width: 500px;
+    
+    }
+  }
+
+  
+  
