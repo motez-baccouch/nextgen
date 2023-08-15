@@ -6,16 +6,39 @@ import './ReverseEngineering.scss';
 import CodeIcon from '@mui/icons-material/Code';
 
 const ReverseEngineering: React.FC = () => {
-  const [taskCompleted, setTaskCompleted] = useState<boolean[]>([false, false, false, false, false]);
+  var [activeStep, setActiveStep] = useState(0);
+  const [taskCompleted, setTaskCompleted] = useState<boolean[]>([false, false, false]);
   const [codeValue, setCodeValue] = useState<string>(
-    `function modifyCode(input) {
-  // Your code here
-  return modifiedOutput;
-}
-
-modifyCode("input data");`
+    `function generateWelcomeMessage(name, language) {
+      let message = "";
+      if(language === 'English'){
+          message = \`Hello, \${name}! Welcome to our site.\`;
+      } else if(language === 'Spanish'){
+          message = \`Hola, \${name}! Bienvenido a nuestro sitio.\`;
+      } else {
+          message = \`Hi, \${name}! You are welcome.\`;
+      }
+      return message;
+  }
+  
+  generateWelcomeMessage('John', 'English');`
   );
 
+
+  const handleRunCode = () => {
+    try {
+      const output = eval(codeValue);
+      toast(`Code Output: ${output}`, {
+        autoClose: 2000,
+        style: { background: '#333', color: '#fff', fontWeight: 'bold' },
+        bodyStyle: { fontSize: '16px' },
+      });
+      
+    } catch (error) {
+      console.error('Code Execution Error:', error);
+    }
+  };
+  
   const handleTaskCheckbox = (index: number) => {
     const updatedTasks = [...taskCompleted];
     updatedTasks[index] = !updatedTasks[index];
@@ -28,29 +51,108 @@ modifyCode("input data");`
     }
   };
 
-  const handleRunCode = () => {
-    try {
-      const result = eval(codeValue);
-      toast(`Code Output: ${result}`, {
-        autoClose: 2000,
-        closeButton: false,
-        style: { background: '#333', color: '#fff', fontWeight: 'bold' },
-        bodyStyle: { fontSize: '16px' },
-      });
-    } catch (error) {
-      toast(`Error: ${error}`, {
-        autoClose: 2000,
-        closeButton: false,
-        style: { background: 'red', color: '#fff', fontWeight: 'bold' },
-        bodyStyle: { fontSize: '16px' },
-      });
+  const handleNext = () => {
+    if (taskCompleted[activeStep]) {
+      setActiveStep(prevStep => prevStep + 1);
+    } else {
+      toast.error('Complete the current step before proceeding.');
     }
   };
+
+
+
+  const handleStepClick = (stepIndex: number) => {
+    setActiveStep(stepIndex);
+    checkCodeForStep(stepIndex, codeValue);
+  };
+
+
+  const handleStepCompleteToggle = (index: number) => {
+    if (index === 0 || taskCompleted[index - 1]) {
+      const updatedCompletedSteps = [...taskCompleted];
+      updatedCompletedSteps[index] = !updatedCompletedSteps[index];
+      setTaskCompleted(updatedCompletedSteps);
+    } else {
+      toast.error('Complete the previous step before marking this step as completed.');
+    }
+  };
+
+  const checkCodeForStep = (stepIndex: number, code: string) => {
+    switch (stepIndex) {
+      case 0: // Check for the first step
+        console.log('Checking step 0 code:', code);
+        if (code.includes('hahaha') ) {
+          setTaskCompleted(prevCompletedSteps => {
+            const updatedSteps = [...prevCompletedSteps];
+            updatedSteps[0] = true;
+            console.log('Step 0 marked as completed');
+            console.log(activeStep)
+            
+            return updatedSteps;
+          });
+          activeStep++
+        }
+        break;
+        case 1: // Check for the first step
+        console.log('Checking step 1 code:', code);
+        if (code.includes('for (let i = 0; i < array.length; i++)') || (code.includes('let i = 0') && code.includes('while (i < myArray.length)') ))  {
+          setTaskCompleted(prevCompletedSteps => {
+            const updatedSteps = [...prevCompletedSteps];
+            updatedSteps[1] = true;
+
+            console.log('Step 1 marked as completed');
+            return updatedSteps;
+          });
+          activeStep++
+        }
+        break;
+      // ... (other cases for different steps)
+      default:
+        break;
+    }
+  };
+
+  
+
+  const codingSteps = [
+    'french support',
+    'default message change',
+    'age support',
+    
+  ];
+
+ 
+
 
   return (
     <div className="reverse-engineering-task">
         <h1 style={{color:"white"}} className="title">Reverse Engineering</h1>
-     
+        <div className="task-instructions">
+        <h3 style={{color:"white"}}>  Your task is to tinker with the function to change its behavior in the following ways:
+</h3>
+        <ol style={{fontSize:30}}>
+          <li style={{color:"white"}}>Add support for French. If the language is French, the message should be Bonjour, (name)! Bienvenue sur notre site.</li>
+          <li style={{color:"white"}}>Change the default message (when the language is neither English, Spanish, nor French) to Hello, (name)! We're happy to see you here.</li>
+          <li style={{color:"white"}}>add an age parametre for the function and replace the messages to  Hello, (name)! you are (age) years old and We're happy to see you here..</li>
+          
+        </ol>
+      </div>
+      <div className="coding-steps">
+                        {codingSteps.map((step, index) => (
+                          <div key={index} className="coding-step">
+                            <p>
+                              {step}
+                              <input
+                                style={{ marginLeft: 40 }}
+                                type="checkbox"
+                                className="step-checkbox"
+                                checked={taskCompleted[index]}
+                                onChange={() => handleStepCompleteToggle(index)}
+                              />
+                            </p>
+                          </div>
+                        ))}
+                      </div>
       <div className="editor-container">
         <MonacoEditor
           width="1000"
@@ -67,16 +169,7 @@ modifyCode("input data");`
           </button>
         </div>
       </div>
-      <div className="task-instructions">
-        <h3 style={{color:"white"}}>Instructions:</h3>
-        <ol style={{fontSize:30}}>
-          <li style={{color:"white"}}>Modify the code to achieve a specific outcome.</li>
-          <li style={{color:"white"}}>Refactor a section of the code to improve readability.</li>
-          <li style={{color:"white"}}>Add a new feature that enhances the functionality.</li>
-          <li style={{color:"white"}}>Identify and fix any existing bugs or errors in the code.</li>
-          <li style={{color:"white"}}>Implement an alternative approach to solve a problem.</li>
-        </ol>
-      </div>
+      
       <div className="task-checkboxes">
         
         <ul  style={{position:"absolute",top:850,left:1450,fontSize:30}}>
