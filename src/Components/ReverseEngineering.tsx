@@ -95,7 +95,7 @@ const ReverseEngineering: React.FC = () => {
         break;
         case 1: // Check for the first step
         console.log('Checking step 1 code:', code);
-        if (code.includes('for (let i = 0; i < array.length; i++)') || (code.includes('let i = 0') && code.includes('while (i < myArray.length)') ))  {
+        if (code.includes('hehehe') )  {
           setTaskCompleted(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[1] = true;
