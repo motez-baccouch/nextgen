@@ -1,0 +1,63 @@
+.reverse-engineering-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .editor-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .editor-container button {
+    border: none;
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .custom-toast {
+    background: #333;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .editor-container button h3 {
+    margin: 0;
+  }
+  
+  .monaco-editor {
+    width: 80%; /* Adjust as needed */
+    height: 200px; /* Adjust as needed */
+    margin-bottom: 20px;
+  }
+  
+  .task-instructions {
+    text-align: left;
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+  
+  .task-instructions h3 {
+    margin-bottom: 10px;
+  }
+  
+  .reverse-engineering-task button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .reverse-engineering-task button:disabled {
+    background-color: lightgray;
+    cursor: not-allowed;
+  }
+  
