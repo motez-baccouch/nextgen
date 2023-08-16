@@ -32,13 +32,14 @@ const BigProject: React.FC = () => {
       interval = setInterval(() => {
         setTimer(prevTimer => prevTimer - 1);
 
-        if (timer <= 0 && !isTimeOut) {
-          setTimerActive(false); // Stop the timer
-          setIsTimeOut(true); // Set time out state
-          toast.error('You\'re out of time.', {
+        if (timer === 0 && !isTimeOut) {
+          clearInterval(interval);
+          setTimerActive(false);
+          setIsTimeOut(true);
+          toast.error("You're out of time.", {
             position: toast.POSITION.BOTTOM_CENTER,
-            autoClose: false, // Disable auto close
-            closeOnClick: false, // Disable close on click
+            autoClose: false,
+            closeOnClick: false,
           });
         }
       }, 1000);
@@ -54,6 +55,7 @@ const BigProject: React.FC = () => {
   }, [codeValue]);
 
   const handleRunCode = () => {
+    
     try {
       const startTime = performance.now();
       const output = eval(codeValue);
@@ -96,6 +98,15 @@ const BigProject: React.FC = () => {
       }
     } catch (error) {
       console.error('Code Execution Error:', error);
+      if (error instanceof Error) {
+        toast.error(`Code Execution Error: ${error.message}`, {
+          autoClose: 5000, // Display the error toast for 5 seconds
+          style: { background: 'red', color: 'white', fontWeight: 'bold' },
+          bodyStyle: { fontSize: '16px' },
+        });
+      } else {
+        console.error('An unknown error occurred:', error);
+      }
     }
   };
 
@@ -105,13 +116,7 @@ const BigProject: React.FC = () => {
     toast.dismiss();
   };
 
-  const handleNext = () => {
-    if (completedSteps[activeStep]) {
-      setActiveStep(prevStep => prevStep + 1);
-    } else {
-      toast.error('Complete the current step before proceeding.');
-    }
-  };
+ 
 
   const handleShowTipImage = (index: number) => {
     const updatedShowTipImages = [...showTipImages];
@@ -160,9 +165,6 @@ const BigProject: React.FC = () => {
     setIsTipsVisible(!isTipsVisible);
   };
 
-  const handleCloseTips = () => {
-    setIsTipsVisible(false);
-  };
 
   const handleCodeChange = (newValue: string) => {
     if ((timer > 0 || isEditingAfterTimeout) && !isTimeOut) {
@@ -189,6 +191,14 @@ const BigProject: React.FC = () => {
       const updatedCompletedSteps = [...completedSteps];
       updatedCompletedSteps[index] = !updatedCompletedSteps[index];
       setCompletedSteps(updatedCompletedSteps);
+
+      if (updatedCompletedSteps[index]) {
+        toast.success(`Congratulations! You completed Step ${index + 1}`, {
+          position: toast.POSITION.BOTTOM_CENTER,
+          autoClose: 3000, 
+          closeOnClick: true,
+        });
+      }
     } else {
       toast.error('Complete the previous step before marking this step as completed.');
     }
@@ -198,7 +208,7 @@ const BigProject: React.FC = () => {
     switch (stepIndex) {
       case 0: // Check for the first step
         console.log('Checking step 0 code:', code);
-        if (code.includes('array = [1,2,3,4]') || code.includes('array = new Array(1, 2, 3, 4)') || code.includes('array = Array.from([1, 2, 3, 4])') || code.includes('array = [...[1, 2, 3, 4]]') || code.includes('array = new Array(1, 2, 3, 4)') || (code.includes('array = []') && code.includes('array.push(1, 2, 3, 4)')) || code.includes('array = [].concat(1, 2, 3, 4)') || code.includes('array = Array.of(1, 2, 3, 4)') ) {
+        if (code.includes('var array = [1,2,3,4]')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[0] = true;
@@ -206,13 +216,19 @@ const BigProject: React.FC = () => {
             console.log(activeStep)
             
             return updatedSteps;
+
+          });
+          toast.success(`Congratulations! You completed Step 1`, { // Show toast for Step 1 completion
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3000,
+            closeOnClick: true,
           });
           activeStep++
         }
         break;
         case 1: // Check for the first step
         console.log('Checking step 1 code:', code);
-        if (code.includes('for (let i = 0; i < array.length; i++)') || (code.includes('let i = 0') && code.includes('while (i < myArray.length)') ))  {
+        if (code.includes('hahaha')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[1] = true;
@@ -220,6 +236,13 @@ const BigProject: React.FC = () => {
             console.log('Step 1 marked as completed');
             return updatedSteps;
           });
+
+          toast.success(`Congratulations! You completed Step 2`, { // Show toast for Step 1 completion
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3000,
+            closeOnClick: true,
+          });
+
           activeStep++
         }
         break;
@@ -230,7 +253,7 @@ const BigProject: React.FC = () => {
   };
 
   const editorOptions = {
-    readOnly: (timer <= 0 && !isEditingAfterTimeout) || isTimeOut, // Set readOnly based on the timer, editing after timeout, and time out state
+    readOnly: (timer <= 0 && !isEditingAfterTimeout) || isTimeOut,
   };
 
   const steps = ['Coding', 'Finalize'];
@@ -277,7 +300,7 @@ const BigProject: React.FC = () => {
                       Show Tips and Tricks
                     </button>
                     <div className="timer">
-                      <h3 style={{color:"white"}}> Time Remaining: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}</h3>
+                     {!timerActive ? <h3 style={{color:"white"}}>Out of time </h3> : <h3 style={{color:"white"}}> Time Remaining: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}</h3>  }
                     </div>
                     <div className="code-editor">
                       <div className="coding-steps">
@@ -290,6 +313,7 @@ const BigProject: React.FC = () => {
                                 type="checkbox"
                                 className="step-checkbox"
                                 checked={completedSteps[index]}
+                                disabled={codeValue ? false : true}
                                 onChange={() => handleStepCompleteToggle(index)}
                               />
                             </p>

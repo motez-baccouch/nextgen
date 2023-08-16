@@ -1,9 +1,11 @@
+
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import './FiveExercises.scss'; // Import your custom styles
 import MonacoEditor from 'react-monaco-editor/lib/editor';
+import CodeIcon from '@mui/icons-material/Code';
 
 const FiveExercises: React.FC = () => {
     const steps = [
@@ -19,14 +21,40 @@ const FiveExercises: React.FC = () => {
   const [isFading, setIsFading] = useState(false);
   const [editorValues, setEditorValues] = useState<string[]>(new Array(steps.length).fill(''));
 
-  const handleEditorValueChange = (index: number, value: string) => {
+   const handleEditorValueChange = (index: number, value: string) => {
     const newValues = [...editorValues];
     newValues[index] = value;
     setEditorValues(newValues);
-     console.log('Editor Values:', newValues);
+    console.log('Editor Values:', newValues);
   };
 
-  
+  const handleRunCode = (index: number) => {
+    const code = editorValues[index];
+    try {
+      // Add your code execution logic here
+      const output = eval(code); // Replace with actual code execution logic
+      // Rest of the code...
+
+      toast(`Code Output: ${output}`, {
+        autoClose: 2000,
+        style: { background: '#333', color: '#fff', fontWeight: 'bold' },
+        bodyStyle: { fontSize: '16px' },
+      });
+
+      // Rest of the code...
+    } catch (error) {
+      console.error('Code Execution Error:', error);
+      if (error instanceof Error) {
+        toast.error(`Code Execution Error: ${error.message}`, {
+          autoClose: 5000, // Display the error toast for 5 seconds
+          style: { background: 'red', color: 'white', fontWeight: 'bold' },
+          bodyStyle: { fontSize: '16px' },
+        });
+      } else {
+        console.error('An unknown error occurred:', error);
+      }
+    }
+  };
   
   const exercises = [
     'iterate over an array',
@@ -72,26 +100,24 @@ const FiveExercises: React.FC = () => {
     setShowTips(!showTips);
   };
 
-  const handleStepClick = (stepIndex: number) => {
-    setActiveStep(stepIndex);
-    setShowTips(false);
-    if (toastId) {
-      toast.dismiss(toastId);
-      setToastId(null);
-    }
-  };
+ 
 
-  const codeEditors = steps.map((_, index) => (
-    <MonacoEditor
-      key={index}
-      width="100%"
-      height="300"
-      language="javascript"
-      theme="vs-dark"
-      options={{ readOnly: false }}
-      value={editorValues[index]}
-      onChange={(newValue) => handleEditorValueChange(index, newValue)}
-    />
+  const exerciseEditors = steps.map((_, index) => (
+    <div key={index} className="exercise-editor">
+      <MonacoEditor
+        width="100%"
+        height="300"
+        language="javascript"
+        theme="vs-dark"
+        options={{ readOnly: false }}
+        value={editorValues[index]}
+        onChange={(newValue) => handleEditorValueChange(index, newValue)}
+      />
+      <button className="run-code-button" onClick={() => handleRunCode(index)}>
+        <h3 style={{ color: 'white' }}>Run</h3>
+        <CodeIcon style={{ color: 'white', fontSize: 70 }} />
+      </button>
+    </div>
   ));
 
   return (
@@ -103,7 +129,7 @@ const FiveExercises: React.FC = () => {
             <div
               key={index}
               className={`step ${index === activeStep ? 'active' : ''}`}
-              onClick={() => handleStepClick(index)}
+              onClick={() => setActiveStep(index)}
             >
               {label}
             </div>
@@ -119,26 +145,7 @@ const FiveExercises: React.FC = () => {
               <p className="step-label">
                 {steps[activeStep]}
               </p>
-              <p className="exercise-description">
-                {exercises[activeStep]}
-              </p>
-              <button 
-                style={{ width: 180 }}
-                className={`show-tips-button ${isFading ? 'fade-out' : ''}`}
-                onClick={() => {
-                  if (!isFading) {
-                    setIsFading(true);
-                    setTimeout(() => {
-                      setIsFading(false);
-                      handleShowTips(activeStep);
-                      setShowTips(!showTips);
-                    }, 500); // Delay to match the CSS transition duration
-                  }
-                }}
-              >
-                {showTips ? "Hide Tips and Tricks" : "Show Tips and Tricks"}
-              </button>
-              {codeEditors[activeStep]}
+              {exerciseEditors[activeStep]}
             </div>
           )}
         </div>
@@ -146,6 +153,7 @@ const FiveExercises: React.FC = () => {
       </div>
     </div>
   );
+
 };
 
 export default FiveExercises;
