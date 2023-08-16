@@ -45,13 +45,26 @@ const BeforeAfter: React.FC = () => {
     console.log('Code Value:', codeValue);
   }, [codeValue]);
   const handleRunCode = () => {
-    const output = eval(codeValue);
-    toast(`Code Output: ${JSON.stringify(output)}`, {
-      autoClose: 2000,
-      style: { background: '#333', color: '#fff', fontWeight: 'bold' },
-      bodyStyle: { fontSize: '16px' },
-    })
-  }
+    try {
+      const output = eval(codeValue);
+      toast(`Code Output: ${JSON.stringify(output)}`, {
+        autoClose: 2000,
+        style: { background: '#333', color: '#fff', fontWeight: 'bold' },
+        bodyStyle: { fontSize: '16px' },
+      });
+    } catch (error) {
+      console.error('Code Execution Error:', error);
+      if (error instanceof Error) {
+        toast.error(`Code Execution Error: ${error.message}`, {
+          autoClose: 5000, // Display the error toast for 5 seconds
+          style: { background: 'red', color: 'white', fontWeight: 'bold' },
+          bodyStyle: { fontSize: '16px' },
+        });
+      } else {
+        console.error('An unknown error occurred:', error);
+      }
+    }
+  } 
 
   const handleRunCodeBefore = () => {
     try {
