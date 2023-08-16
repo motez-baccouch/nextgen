@@ -24,13 +24,10 @@ const BigProject: React.FC = () => {
   const [timer, setTimer] = useState<number>(20); // Timer in seconds (10 minutes)
   const [timerActive, setTimerActive] = useState<boolean>(true);
   const [isTimeOut, setIsTimeOut] = useState(false); // Track if the time is out
-  const [isEditingAfterTimeout, setIsEditingAfterTimeout] = useState(false); 
-  let interval: NodeJS.Timeout;
-
-
- 
+  const [isEditingAfterTimeout, setIsEditingAfterTimeout] = useState(false); // Track if editing is allowed after timeout
 
   useEffect(() => {
+    let interval: NodeJS.Timeout;
     if (timerActive) {
       interval = setInterval(() => {
         setTimer(prevTimer => prevTimer - 1);
@@ -211,7 +208,7 @@ const BigProject: React.FC = () => {
     switch (stepIndex) {
       case 0: // Check for the first step
         console.log('Checking step 0 code:', code);
-        if (code.includes('array = [1,2,3,4]') || code.includes('array = new Array(1, 2, 3, 4)') || code.includes('array = Array.from([1, 2, 3, 4])') || code.includes('array = [...[1, 2, 3, 4]]') || code.includes('array = new Array(1, 2, 3, 4)') || (code.includes('array = []') && code.includes('array.push(1, 2, 3, 4)')) || code.includes('array = [].concat(1, 2, 3, 4)') || code.includes('array = Array.of(1, 2, 3, 4)') ) {
+        if (code.includes('var array = [1,2,3,4]')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[0] = true;
@@ -231,7 +228,7 @@ const BigProject: React.FC = () => {
         break;
         case 1: // Check for the first step
         console.log('Checking step 1 code:', code);
-        if (code.includes('for (let i = 0; i < array.length; i++)') || (code.includes('let i = 0') && code.includes('while (i < myArray.length)') ))  {
+        if (code.includes('hahaha')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[1] = true;
@@ -239,11 +236,13 @@ const BigProject: React.FC = () => {
             console.log('Step 1 marked as completed');
             return updatedSteps;
           });
+
           toast.success(`Congratulations! You completed Step 2`, { // Show toast for Step 1 completion
             position: toast.POSITION.BOTTOM_CENTER,
             autoClose: 3000,
             closeOnClick: true,
           });
+
           activeStep++
         }
         break;
