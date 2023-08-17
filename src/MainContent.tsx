@@ -83,10 +83,7 @@ const Carousel: React.FC<CarouselProps> = ({children}) => {
 
 // MainContent component that uses the Card and Carousel components
 const MainContent: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
+  
   return(
   <div className='mainContent'>
     <br/>

@@ -50,7 +50,7 @@ const Header: React.FC = () => {
     </div>
 
     <div className="subnav">
-    <img src={logo} />
+    <img src={logo}   style={{width:"70px" , marginBottom:"15px" ,transform:'scaleX(-1)', rotate: '180deg'}}/>
       
        
     </div>

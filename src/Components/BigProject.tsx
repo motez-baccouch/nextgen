@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CodeIcon from '@mui/icons-material/Code';
+import { Link } from 'react-router-dom';
 
 const BigProject: React.FC = () => {
   var [activeStep, setActiveStep] = useState(0);
@@ -15,13 +16,13 @@ const BigProject: React.FC = () => {
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false]);
   const [checkedTips, setCheckedTips] = useState<boolean[]>([false, false]);
   const tips = [
-    'Tip 1: Lorem ipsum dolor sit amet.',
-    'Tip 2: Lorem ipsum dolor sit amet.',
+    'Tip 1: you can search for for loops and their usage or review the course',
+    'Tip 2: Luse the map function',
     // Add more tips as needed
   ];
   const [showTipImages, setShowTipImages] = useState<boolean[]>(new Array(tips.length).fill(false));
 
-  const [timer, setTimer] = useState<number>(20); // Timer in seconds (10 minutes)
+  const [timer, setTimer] = useState<number>(600); // Timer in seconds (10 minutes)
   const [timerActive, setTimerActive] = useState<boolean>(true);
   const [isTimeOut, setIsTimeOut] = useState(false); // Track if the time is out
   const [isEditingAfterTimeout, setIsEditingAfterTimeout] = useState(false); // Track if editing is allowed after timeout
@@ -246,7 +247,46 @@ const BigProject: React.FC = () => {
           activeStep++
         }
         break;
-      // ... (other cases for different steps)
+        case 2: // Check for the first step
+        console.log('Checking step 1 code:', code);
+        if (code.includes('hahaha')) {
+          setCompletedSteps(prevCompletedSteps => {
+            const updatedSteps = [...prevCompletedSteps];
+            updatedSteps[2] = true;
+
+            console.log('Step 3 marked as completed');
+            return updatedSteps;
+          });
+
+          toast.success(`Congratulations! You completed Step 3`, { // Show toast for Step 1 completion
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3000,
+            closeOnClick: true,
+          });
+
+          activeStep++
+        }
+        break;
+        case 3: // Check for the first step
+        console.log('Checking step 4 code:', code);
+        if (code.includes('hahaha')) {
+          setCompletedSteps(prevCompletedSteps => {
+            const updatedSteps = [...prevCompletedSteps];
+            updatedSteps[3] = true;
+
+            console.log('Step 4 marked as completed');
+            return updatedSteps;
+          });
+
+          toast.success(`Congratulations! You completed Step 4`, { // Show toast for Step 1 completion
+            position: toast.POSITION.BOTTOM_CENTER,
+            autoClose: 3000,
+            closeOnClick: true,
+          });
+
+          activeStep++
+        }
+        break;
       default:
         break;
     }
@@ -349,6 +389,7 @@ const BigProject: React.FC = () => {
                     </div>
                   </>
                 )}
+                
                 <ToastContainer />
                 {isTimeOut && !isEditingAfterTimeout && (
                   <div className="timeout-message" style={{position:"relative",top:-190}}>
@@ -359,12 +400,24 @@ const BigProject: React.FC = () => {
                     <button className="show-tips-button"  style={{position:"relative",left:"-53%",top:1 ,backgroundColor:"red"}}  onClick={handleContinueCoding}>
                       Finalize your score 
                     </button>
+
                   </div>
+                  
                 )}
               </div>
+              
             )}
           </div>
+          
         )}
+        <Link to="/reverse">
+    <button  className="show-tips-button" style={{
+    
+    position: "relative",
+    top: -15,
+    left:"-40%"
+   }} > before and after exercice </button>
+  </Link>
       </div>
     </div>
   );
