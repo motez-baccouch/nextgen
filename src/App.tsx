@@ -7,6 +7,7 @@ import BigProject from './Components/BigProject';
 import FiveExercises from './Components/FiveExercises';
 import BeforeAfter from './Components/BeforeAfter';
 import ReverseEngineering from './Components/ReverseEngineering';
+import Loops from './Components/Loops';
 
 
 
@@ -27,6 +28,7 @@ const App: React.FC = () => {
       <Route path="/five" element={<FiveExercises/>}  />
       <Route path="/beforeafter" element={<BeforeAfter />}  />
       <Route path="/reverse" element={<ReverseEngineering />}  />
+      <Route path="/loops" element={<Loops />}  />
       
       
       
