@@ -14,17 +14,20 @@ import ReverseEngineering from './Components/ReverseEngineering';
 
 
 
+
 const App: React.FC = () => {
   
   return (
     <Router>
       <Header />
+      
       <Routes>
       <Route path="/" element={<LandingPage/>}  />
       <Route path="/bigproject" element={<BigProject/>}  />
       <Route path="/five" element={<FiveExercises/>}  />
       <Route path="/beforeafter" element={<BeforeAfter />}  />
       <Route path="/reverse" element={<ReverseEngineering />}  />
+      
       
       
       </Routes>

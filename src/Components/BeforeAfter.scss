@@ -3,6 +3,9 @@
     flex-direction: column;
     align-items: center;
     margin: 20px;
+    position: relative;
+    top: -80px;
+    
   }
   
   .flexx {
@@ -41,14 +44,20 @@
   }
   
   
-  .code-editor {
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 48%; 
+ 
+  .exercise-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    overflow-y: hidden;
   }
   
+  .exercise-content.visible {
+    opacity: 1;
+    max-height: 1110px; 
+    overflow-y: hidden;
+  }
   h2 {
     margin-bottom: 10px;
     font-size: 18px;

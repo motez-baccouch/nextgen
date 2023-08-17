@@ -266,10 +266,10 @@ const BigProject: React.FC = () => {
   ];
 
   return (
-    <div className="big-project-container">
-      <div className="project-card">
+    <div   className="big-project-container"  style={{marginBottom:80}}>
+      <div  className="project-card1" >
         <h1>Big Project: Chapter ....</h1>
-        <div className="steps-container">
+        <div    className="steps-container" >
           {steps.map((label, index) => (
             <div
               key={index}
@@ -296,14 +296,14 @@ const BigProject: React.FC = () => {
                
                 {activeStep === 0 && (
                   <>
-                    <button className="show-tips-button" onClick={handleShowTips}>
+                    <button className="show-tips-button"  style={{position:"relative",top:40,left:107}} onClick={handleShowTips}>
                       Show Tips and Tricks
                     </button>
                     <div className="timer">
-                     {!timerActive ? <h3 style={{color:"white"}}>Out of time </h3> : <h3 style={{color:"white"}}> Time Remaining: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}</h3>  }
+                     {!timerActive ? <h3 style={{color:"white",position:'relative',top:25}}>Out of time </h3> : <h3 style={{color:"white",position:"relative",top:25}}> Time Remaining: {Math.floor(timer / 60)}:{(timer % 60).toString().padStart(2, '0')}</h3>  }
                     </div>
-                    <div className="code-editor">
-                      <div className="coding-steps">
+                    <div className="code-editor1">
+                      <div className="coding-steps" style={{marginTop:40}}>
                         {codingSteps.map((step, index) => (
                           <div key={index} className="coding-step">
                             <p>
@@ -321,20 +321,22 @@ const BigProject: React.FC = () => {
                         ))}
                       </div>
                       <h3>Code Editor</h3>
+                      <div style={{position:"relative",top:-170 }}>
                       <MonacoEditor
                         width="100%"
-                        height="300"
+                        height="500"
                         language="javascript"
                         theme="vs-dark"
                         value={codeValue}
+                        
                         onChange={handleCodeChange}
                         options={editorOptions}
-                      />
+                      /></div>
                       <button
                         style={{
                           position: 'relative',
-                          top: -80,
-                          left: 1249,
+                          top: -250,
+                          left: "95%",
                           backgroundColor: 'transparent',
                           border: 'transparent'
                         }}
@@ -349,10 +351,13 @@ const BigProject: React.FC = () => {
                 )}
                 <ToastContainer />
                 {isTimeOut && !isEditingAfterTimeout && (
-                  <div className="timeout-message">
-                    <h3 style={{color:"white"}}>You're out of time. Your Score is {score}</h3>
-                    <button className="continue-coding-button" onClick={handleContinueCoding}>
+                  <div className="timeout-message" style={{position:"relative",top:-190}}>
+                    <h3 style={{color:"white" , position:"relative",top:-80}}>You're out of time. Your Score is {score}</h3>
+                    <button className="show-tips-button"  style={{position:"relative",left:"-63%",top:-40}}  onClick={handleContinueCoding}>
                       Continue Coding ?
+                    </button>
+                    <button className="show-tips-button"  style={{position:"relative",left:"-53%",top:1 ,backgroundColor:"red"}}  onClick={handleContinueCoding}>
+                      Finalize your score 
                     </button>
                   </div>
                 )}

@@ -2,16 +2,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 1400px;
+  
   }
   
-  .project-card {
+  .project-card1 {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 5px;
-    height: 1150px;
-    width: 1400px;
+    height: 1182px;
+    width: 2075px;
+    margin-bottom: 172px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 234px;
   }
   
   .steps-container {
@@ -97,24 +100,9 @@
     font-weight: bold;
   }
   
-  .next-button,
-  .optimize-button {
-    display: block;
-    margin-top: 35%;
-    padding: 8px 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    margin-left: 50%;
-    cursor: pointer;
-  }
   
-  .optimize-button {
-    background-color: #dc3545;
-    margin-left: 10px;
-  }
   
+ 
   .result {
     text-align: center;
     margin-top: 20px;
@@ -203,4 +191,10 @@
   }
 
   
+  .coding-steps{
+    margin-bottom: 140px;
+    position: relative;
+    top: 0px;
+}
+
   
