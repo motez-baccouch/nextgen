@@ -209,7 +209,11 @@ const BigProject: React.FC = () => {
     switch (stepIndex) {
       case 0: // Check for the first step
         console.log('Checking step 0 code:', code);
-        if (code.includes('var array = [1,2,3,4]')) {
+        if ( code.includes('array = [1, 2, 3, 4]') ||
+        code.includes('array = new Array(1, 2, 3, 4)') ||
+        code.includes('array = []; array.push(1, 2, 3, 4)') ||
+        code.includes('array = Array.of(1, 2, 3, 4)') ||
+        code.includes('array = []; array[0] = 1; array[1] = 2; array[2] = 3; array[3] = 4')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[0] = true;
@@ -229,7 +233,13 @@ const BigProject: React.FC = () => {
         break;
         case 1: // Check for the first step
         console.log('Checking step 1 code:', code);
-        if (code.includes('hahaha')) {
+        if (code.includes('array.forEach') ||
+        code.includes('array.map') ||
+        code.includes('for (let i = 0; i < array.length; i++)') ||
+        code.includes('for (let i = 0; i < 4; i++)') ||
+        code.includes('for (const element of array)') ||
+        code.includes('while (i < array.length)') ||
+        code.includes('do {')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[1] = true;
@@ -249,7 +259,10 @@ const BigProject: React.FC = () => {
         break;
         case 2: // Check for the first step
         console.log('Checking step 1 code:', code);
-        if (code.includes('hahaha')) {
+        if ( code.includes('newarray = []') ||
+        code.includes('newarray = new Array(1, 2, 3, 4)') ||
+        code.includes('newarray = [];') ||
+        code.includes(' newarray = Array.of()')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[2] = true;
@@ -269,7 +282,20 @@ const BigProject: React.FC = () => {
         break;
         case 3: // Check for the first step
         console.log('Checking step 4 code:', code);
-        if (code.includes('hahaha')) {
+        if (code.includes('newarray[i]=array[i] * 2')||
+          code.includes('newArray.push(array[i] * 2)')||
+          code.includes('array.map(num => num * 2)') ||
+        code.includes('array.map(function(num) { return num * 2; })') ||
+        code.includes('array.map(function(num) { return num * 2 })') ||
+        code.includes('array.map((num) => { return num * 2 })') ||
+        code.includes('array.map((num) => num * 2)') ||
+        code.includes('array.map((num) => {return num * 2;})') ||
+        code.includes('array.map((num) => {return num * 2})') ||
+        code.includes('array.map(num => { return num * 2 })') ||
+        code.includes('array.map(function(num) {return num * 2;})') ||
+        code.includes('array.map(function(num) {return num * 2})') ||
+        code.includes('array.map(num => {return num * 2})') ||
+        code.includes('=> {return num * 2; })')) {
           setCompletedSteps(prevCompletedSteps => {
             const updatedSteps = [...prevCompletedSteps];
             updatedSteps[3] = true;
@@ -301,7 +327,7 @@ const BigProject: React.FC = () => {
   const codingSteps = [
     'Make an array consisting of 1, 2, 3, 4',
     'Loop over the Array',
-    'Make another array to store the result',
+    'Make another array called newarray to store the result',
     'Return the new array with all the old array\'s elements doubled',
   ];
 
