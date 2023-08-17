@@ -1,15 +1,24 @@
 .reverse-engineering-task {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  height: 1200px;
+  margin-left: 20px;
+ 
+  width: 2077px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
   }
   
   .editor-container {
+    width: 100% ;
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    
+   
+   
   }
   
   .editor-container button {
@@ -28,18 +37,17 @@
     font-size: 16px;
   }
   .editor-container button h3 {
-    margin: 0;
+    margin: 0
   }
   
-  .monaco-editor {
-    width: 80%; /* Adjust as needed */
-    height: 200px; /* Adjust as needed */
-    margin-bottom: 20px;
-  }
+  
   
   .task-instructions {
-    text-align: left;
-    max-width: 800px;
+    text-align: center;
+    max-width: 50%;
+    margin-top: 20px;
+    left: 20px;
+    margin-left: 505px;
     margin-bottom: 20px;
   }
   

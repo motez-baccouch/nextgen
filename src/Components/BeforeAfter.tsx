@@ -4,8 +4,27 @@ import './BeforeAfter.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CodeIcon from '@mui/icons-material/Code';
+import FiveExercises from './FiveExercises';
+import { Link } from 'react-router-dom'
+
+
 
 const BeforeAfter: React.FC = () => {
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 300) {
+        setShowExercises(true);
+      } else {
+        setShowExercises(false);
+      }
+    };
+  
+    window.addEventListener("scroll", handleScroll);
+  
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   const initialCodeBefore = `function doubleArrayItems(arr) {
     const result = [];
     for (let i = 0; i < arr.length; i++) {
@@ -19,7 +38,7 @@ const BeforeAfter: React.FC = () => {
     return arr.map(item => item * 2);
   }
   doubleArrayItemsWithMap([1,2,3,4])`;
-
+  const [showExercises, setShowExercises] = useState(false);
   const [output, setOutput] = useState<string>('');
   const [codeValueBefore, setCodeValueBefore] = useState(initialCodeBefore);
   const [codeValueAfter, setCodeValueAfter] = useState(initialCodeAfter);
@@ -106,10 +125,10 @@ const BeforeAfter: React.FC = () => {
   };
 
   return (
-    <div className="code-comparison-container">
+    <div className="code-comparison-container " style={{height:"100%"}}>
       <h1 className="comparison-title">Before and After: Using Map</h1>
       <div className="flexx">
-        <div className="code-example">
+        <div className="code-example" >
           <h2 style={{color:'white'}}>Before</h2>
           <p style={{ maxWidth: 800 }}>
             Here is an example of a function that uses a for loop to iterate over an array
@@ -117,19 +136,19 @@ const BeforeAfter: React.FC = () => {
           </p>
           <MonacoEditor
             width="100%"
-            height="300"
+            height="400"
             language="javascript"
             theme="vs-dark"
             value={initialCodeBefore}
             options={editorOptions}
           />
           <div className="run-button">
-            <button style={{ border: "transparent", backgroundColor: "transparent",position:'relative',left:430}} onClick={handleRunCodeBefore}>
+            <button style={{ border: "transparent", backgroundColor: "transparent",position:'relative',left:430,top:-75}} onClick={handleRunCodeBefore}>
               <h3 style={{ color: 'white', position: 'relative', top: -20 }}>Run</h3>
               <CodeIcon style={{ color: 'white', fontSize: 70, position: 'relative', top: -36 }} />
             </button>
           </div>
-          <p className="disadvantages">
+          <p className="disadvantages" style={{position:"relative",top:-70}}>
             Disadvantages of using a for loop:
             <br />
             - More verbose and prone to manual errors.
@@ -147,19 +166,19 @@ const BeforeAfter: React.FC = () => {
           </p>
           <MonacoEditor
             width="100%"
-            height="300"
+            height="400"
             language="javascript"
             theme="vs-dark"
             value={initialCodeAfter}
             options={editorOptions}
           />
           <div className="run-button">
-            <button style={{ border: "transparent", backgroundColor: "transparent",position:'relative',left:430  }} onClick={handleRunCodeAfter}>
+            <button style={{ border: "transparent", backgroundColor: "transparent",position:'relative',left:430,top:-75  }} onClick={handleRunCodeAfter}>
               <h3 style={{ color: 'white', position: 'relative', top: -20 }}>Run</h3>
               <CodeIcon style={{ color: 'white', fontSize: 70, position: 'relative', top: -36 }} />
             </button>
           </div>
-          <p className="advantages">
+          <p className="advantages" style={{position:"relative",top:-70}}>
             Advantages of using the map function:
             <br />
             - More concise and expressive syntax.
@@ -172,13 +191,10 @@ const BeforeAfter: React.FC = () => {
       </div>
 
       <div className="exercise-section">
-        <h3 style={{color:"white",fontSize:120, fontFamily:"Helvetica Neue, sans-serif",fontWeight:"bold",textAlign:"center"}}>Exercise</h3>
-        <div className="code-third">
+        {/* <h3 style={{color:"white",fontSize:120, fontFamily:"Helvetica Neue, sans-serif",fontWeight:"bold",textAlign:"center"}}>Five exercises with increasing difficulties</h3> */}
+        {/* <div className="code-third">
           <p style={{width:900}}>
-            Given an object  const obj = {JSON.stringify({age1:20,
-          age2:80,
-          age3:3,
-          age4:56})} , complete the function below to return all the object ages squared in an array:
+            Given the age object , complete the function below to return all the object ages squared in an array:
           </p>
           <MonacoEditor
             width="100%"
@@ -199,8 +215,16 @@ const BeforeAfter: React.FC = () => {
             <h4 style={{position:'relative',top:-90 ,color:"white"}}>PS 🗒️:</h4>
             <p style={{position:"relative",top:-50 ,fontStyle:"italic"}}>Feel free to try any function you want</p>
           </div>
+        </div> */}
+        
+<div className="exercise-section">
+  
+  <div    className={`exercise-content ${showExercises ? "visible" : ""}`}>
+    <FiveExercises />
+  </div>
+ 
+</div>
         </div>
-      </div>
       <ToastContainer position="top-right" />
     </div>
   );

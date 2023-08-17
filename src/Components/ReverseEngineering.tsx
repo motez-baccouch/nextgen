@@ -128,7 +128,7 @@ const ReverseEngineering: React.FC = () => {
   return (
     <div className="reverse-engineering-task">
         <h1 style={{color:"white"}} className="title">Reverse Engineering</h1>
-        <div className="task-instructions">
+        <div className="task-instructions" style={{width:2000}}>
         <h3 style={{color:"white"}}>  Your task is to tinker with the function to change its behavior in the following ways:
 </h3>
         <ol style={{fontSize:30}}>
@@ -138,7 +138,7 @@ const ReverseEngineering: React.FC = () => {
           
         </ol>
       </div>
-      <div className="coding-steps">
+      <div className="coding-steps"  style={{position:"absolute",left:"75%",top:"70%"}} >
                         {codingSteps.map((step, index) => (
                           <div key={index} className="coding-step">
                             <p>
@@ -154,7 +154,7 @@ const ReverseEngineering: React.FC = () => {
                           </div>
                         ))}
                       </div>
-      <div className="editor-container">
+      <div className="editor-container"  >
         <MonacoEditor
           width="1000"
           height="500"
@@ -164,26 +164,14 @@ const ReverseEngineering: React.FC = () => {
           onChange={setCodeValue}
         />
         <div className="run-button">
-          <button style={{ border: "transparent", backgroundColor: "transparent", position: "relative", left: 430, top: -110 }} onClick={handleRunCode}>
+          <button style={{ border: "transparent", backgroundColor: "transparent", position: "relative", left: 430, top: -270 }} onClick={handleRunCode}>
             <h3 style={{ color: 'white', position: 'relative', top: -20 }}>Run</h3>
             <CodeIcon style={{ color: 'white', fontSize: 70, position: 'relative', top: -36 }} />
           </button>
         </div>
       </div>
       
-      <div className="task-checkboxes">
-        
-        <ul  style={{position:"absolute",top:850,left:1450,fontSize:30}}>
-          {taskCompleted.map((completed, index) => (
-            <li key={index}>
-              <label>
-                <input type="checkbox" checked={completed} onChange={() => handleTaskCheckbox(index)} />
-                Task {index + 1}
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
+      
       <ToastContainer position="top-right" />
     </div>
   );

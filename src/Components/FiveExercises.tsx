@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import './FiveExercises.scss'; // Import your custom styles
 import MonacoEditor from 'react-monaco-editor/lib/editor';
 import CodeIcon from '@mui/icons-material/Code';
+import { Link } from 'react-router-dom';
+
 
 const FiveExercises: React.FC = () => {
     const steps = [
@@ -14,6 +16,13 @@ const FiveExercises: React.FC = () => {
         'Level 3 : for',
         'Level 4 : foreach',
         'Level 5 : map'
+      ];
+      const stepDescriptions = [
+        'in the first level implement what you learnt to just map over an array and console.log all its values using for loop',
+        'in the second level try using while loop to do the same thing',
+        'in here...........................',
+        'in the forth level try using foreach ',
+        'and finally use the built in function map to iterate '
       ];
   const [activeStep, setActiveStep] = useState(0);
   const [toastId, setToastId] = useState<string | null>(null);
@@ -72,48 +81,28 @@ const FiveExercises: React.FC = () => {
     "https://pimylifeup.com/wp-content/uploads/2022/05/javascript-for-of-loops-thumbnail-NoWM.png"
   ];
 
-  const handleShowTips = (stepIndex: number) => {
-    if (!showTips) {
-      const newToastId = toast(
-        <div>
-          {`Tip for ${steps[stepIndex]}`}
-          
-          <img
-            style={{ width: 288 }}
-            src={images[stepIndex]} // Use the image for the current stepIndex
-            alt={`Tip ${stepIndex + 1}`}
-            className="tip-image"
-          />
-        </div>,
-        {
-          className: 'custom-toast',
-          closeButton: false,
-          autoClose: false,
-        }
-      );
-
-      setToastId(newToastId.toString());
-    } else {
-      toast.dismiss(toastId as string);
-    }
-
-    setShowTips(!showTips);
-  };
+  
 
  
 
-  const exerciseEditors = steps.map((_, index) => (
+  const exerciseEditors = steps.map((stepLabel, index) => (
     <div key={index} className="exercise-editor">
+      
+      <p>{stepDescriptions[index]}</p> 
       <MonacoEditor
         width="100%"
-        height="300"
+        height="490"
         language="javascript"
         theme="vs-dark"
-        options={{ readOnly: false }}
+        options={{ readOnly: false, scrollBeyondLastLine: false }}
         value={editorValues[index]}
         onChange={(newValue) => handleEditorValueChange(index, newValue)}
       />
-      <button className="run-code-button" onClick={() => handleRunCode(index)}>
+      <button
+        style={{ backgroundColor: "transparent", border: "transparent", position: "relative", top: -130, left: "93%" }}
+        className="run-code-button"
+        onClick={() => handleRunCode(index)}
+      >
         <h3 style={{ color: 'white' }}>Run</h3>
         <CodeIcon style={{ color: 'white', fontSize: 70 }} />
       </button>
@@ -121,9 +110,9 @@ const FiveExercises: React.FC = () => {
   ));
 
   return (
-    <div className="big-project-container">
+    <div className="big-project-container" style={{height:1100}}>
       <div className="project-card">
-        <h1>Five Exercises with increasing difficulties</h1>
+        <h1 style={{fontSize:130}}>Five Exercises with increasing difficulties</h1>
         <div className="steps-container">
           {steps.map((label, index) => (
             <div
@@ -149,6 +138,14 @@ const FiveExercises: React.FC = () => {
             </div>
           )}
         </div>
+        <Link to="/bigproject">
+    <button  className="show-tips-button" style={{
+    
+    position: "relative",
+    top: -15,
+    left:"-40%"
+   }} >Ready for the big project exercise ?</button>
+  </Link>
         <ToastContainer />
       </div>
     </div>

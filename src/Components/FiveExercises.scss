@@ -2,16 +2,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 100%
+    
   }
   
   .project-card {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 5px;
-    height: 1150px;
-    width: 1400px;
+    height: 100%;
+    width: 2075px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: hidden
+   
   }
   
   .steps-container {
@@ -77,6 +80,14 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     cursor: pointer;
+    &:not(.active) {
+      transition: color 1s ease; 
+    }
+    &:not(.active):hover {
+      color: #007bff; 
+      cursor: pointer;
+      transition: color 1s ease;
+    }
   }
   
   .step.active {
