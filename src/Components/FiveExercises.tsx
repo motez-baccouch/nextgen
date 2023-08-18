@@ -20,7 +20,7 @@ const FiveExercises: React.FC = () => {
       const stepDescriptions = [
         'in the first level implement what you learnt to just map over an array and console.log all its values using for loop',
         'in the second level try using while loop to do the same thing',
-        'now use a for loop ',
+        'in the third level try to iterate over an object and console.log all its values ',
         'in the fourth level try using foreach ',
         'and finally use the built in function map to iterate '
       ];

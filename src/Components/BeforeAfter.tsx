@@ -191,31 +191,7 @@ const BeforeAfter: React.FC = () => {
       </div>
 
       <div className="exercise-section">
-        {/* <h3 style={{color:"white",fontSize:120, fontFamily:"Helvetica Neue, sans-serif",fontWeight:"bold",textAlign:"center"}}>Five exercises with increasing difficulties</h3> */}
-        {/* <div className="code-third">
-          <p style={{width:900}}>
-            Given the age object , complete the function below to return all the object ages squared in an array:
-          </p>
-          <MonacoEditor
-            width="100%"
-            height="300"
-            language="javascript"
-            theme="vs-dark"
-            value={codeValue}
-            onChange={handleCodeChange}
-            
-          />
-          <div className="run-button">
-            <button style={{border:"transparent",backgroundColor:"transparent",position:"relative",left:"90%",top:-70}} onClick={handleRunCode}>
-              <h3 style={{ color: 'white', position: 'relative', top: -20 }}>Run</h3>
-              <CodeIcon style={{ color: 'white', fontSize: 70, position: 'relative', top: -36 }} />
-            </button>
-          </div>
-          <div className="output-section">
-            <h4 style={{position:'relative',top:-90 ,color:"white"}}>PS 🗒️:</h4>
-            <p style={{position:"relative",top:-50 ,fontStyle:"italic"}}>Feel free to try any function you want</p>
-          </div>
-        </div> */}
+        
         
 <div className="exercise-section">
   

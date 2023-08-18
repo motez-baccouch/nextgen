@@ -174,21 +174,7 @@
 
   }
   
-  .carousel {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 10px;
-    overflow-x: scroll;
-    scrollbar-width: none;
-    width: 100%;
-    overflow-y: hidden;
-    box-sizing: border-box;
-  }
   
-  .carousel::-webkit-scrollbar {
-    display: none;
-  }
   .show-tips-button {
     
     transition: color 0.5s ease-in-out;

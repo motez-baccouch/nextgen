@@ -12,12 +12,11 @@ $card-size: 25rem;
 
 .carousel {
   position: relative;
-    width: 25rem;
-    height: 25rem;
-    perspective: 495px;
-    transform-style: preserve-3d;
-    left: 6%;
-
+  width: $card-size;
+  height: $card-size;
+  perspective: 500px;
+  transform-style: preserve-3d;
+  left: 40%;
 }
 
 .card-container {

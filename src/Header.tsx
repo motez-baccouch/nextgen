@@ -30,10 +30,10 @@ const Header: React.FC = () => {
   <div id="trapezoid" onMouseLeave={handleTrapezoidMouseLeave} onMouseEnter={handleTrapezoidMouseEnter} style={{ marginTop: trapezoidMarginTop }}>
   
   <div className="subnav">
-     <button className="subnavbtn" onMouseOver={handleSubNavBtnMouseOver}>About<i className="fa fa-caret-down"></i></button>
+     <button className="subnavbtn" onMouseOver={handleSubNavBtnMouseOver}>Courses<i className="fa fa-caret-down"></i></button>
        <div className="subnav-content">
         <div className="subnav-trapezoid">
-          <a href="/">Home</a>
+          <a href="/loops">Loops</a>
          </div>
        </div>
       </div>
@@ -77,6 +77,7 @@ const Header: React.FC = () => {
          </div>
        </div>
       </div>
+
   </div>
 </nav>
 

@@ -442,7 +442,7 @@ const BigProject: React.FC = () => {
     position: "relative",
     top: -15,
     left:"-40%"
-   }} > before and after exercice </button>
+   }} >Reverse Engineering task</button>
   </Link>
       </div>
     </div>
