@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MonacoEditor from 'react-monaco-editor';
 import './BigProject.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CodeIcon from '@mui/icons-material/Code';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 const BigProject: React.FC = () => {
   var [activeStep, setActiveStep] = useState(0);
+  const monacoEditorRef = useRef<HTMLDivElement | null>(null);
+
   const [isLoading, setIsLoading] = useState(false);
   const [score, setScore] = useState(0);
   const [isTipsVisible, setIsTipsVisible] = useState(false);
   const [codeValue, setCodeValue] = useState('');
   const [completedSteps, setCompletedSteps] = useState<boolean[]>([false, false, false, false]);
   const [checkedTips, setCheckedTips] = useState<boolean[]>([false, false]);
+  const [showAnotherImplementationButton, setShowAnotherImplementationButton] = useState(false);
+
   const tips = [
     'Tip 1: you can search for for loops and their usage or review the course',
     'Tip 2: Luse the map function',
@@ -45,6 +52,10 @@ const BigProject: React.FC = () => {
         }
       }, 1000);
     }
+    setTimeout(() => {
+     
+      setShowAnotherImplementationButton(true);
+    }, 10000);
 
     return () => {
       clearInterval(interval);
@@ -55,6 +66,82 @@ const BigProject: React.FC = () => {
     console.log('Code Value:', codeValue);
   }, [codeValue]);
 
+ const handleShowAnotherImplementation = () => {
+  Swal.fire({
+    title: 'See Another Implementation',
+    html: `
+      <div id="monaco-editor-container" style="height: 500px;"></div>
+      <button id="run-code-button" class="run-code-button-class">Run Code</button>
+    `,
+    showConfirmButton: false,
+    showCancelButton: true,
+    cancelButtonText: 'Done',
+    width: '60%', 
+    
+    didOpen: () => {
+      const editorContainer = document.getElementById('monaco-editor-container');
+      const runCodeButton = document.getElementById('run-code-button');
+
+      if (editorContainer && runCodeButton) {
+        editorContainer.style.display = 'flex';
+        editorContainer.style.justifyContent = 'center';
+        editorContainer.style.alignItems = 'center';
+        editorContainer.style.textAlign = 'left'; 
+
+        const editor = monaco.editor.create(editorContainer, {
+          value: `function forloop(array){
+            var newarr =[]
+            for (var i =0 ; i<array.length;i++){
+                newarr.push(array[i]*2)
+            }
+            return JSON.stringify(newarr)
+        }
+        forloop([1,2,3,4])`,
+          language: 'javascript',
+          theme: 'vs-dark',
+          readOnly:true,
+          fontSize:30,
+          scrollBeyondLastLine: false,
+        
+        });
+
+        runCodeButton.addEventListener('click', () => {
+          handleRunCodeInSweetAlert(editor.getValue()); 
+        });
+      }
+    },
+  });
+};
+
+  const handleRunCodeInSweetAlert = (codeValue: string) => {
+    try {
+      
+      
+      const codeOutput = eval(codeValue);
+      console.log(codeOutput);
+     
+      toast.success(`Code Output: ${codeOutput}`, {
+        autoClose: 2000,
+        style: { background: '#333', color: '#fff', fontWeight: 'bold' },
+        bodyStyle: { fontSize: '16px' },
+        position: toast.POSITION.BOTTOM_CENTER,
+      });
+    } catch (error) {
+      console.error('Code Execution Error:', error);
+      if (error instanceof Error) {
+        toast.error(`Code Execution Error: ${error.message}`, {
+          position: toast.POSITION.BOTTOM_CENTER,
+          
+          style: { background: 'red', color: 'white', fontWeight: 'bold' },
+          bodyStyle: { fontSize: '16px' },
+        });
+      } else {
+        console.error('An unknown error occurred:', error);
+      }
+    }
+  };
+  
+  
   const handleRunCode = () => {
     
     try {
@@ -330,11 +417,42 @@ const BigProject: React.FC = () => {
     'Make another array called newarray to store the result',
     'Return the new array with all the old array\'s elements doubled',
   ];
+  const handleShowSolutionConfirmation = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Do you want to see another implementation?",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, show me!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleShowAnotherImplementation();
+      }
+    });
+  };
 
   return (
     <div   className="big-project-container"  style={{marginBottom:80}}>
       <div  className="project-card1" >
         <h1>Big Project: Chapter ....</h1>
+        <div> 
+       <button
+       className={`show-implementation-button `}
+       style={{
+        position: 'relative',
+        top: 130,
+        left: '-45%',
+        transition: 'opacity 1s ease-in-out',
+        opacity: showAnotherImplementationButton ? 1 : 0,
+       }}
+       onClick={handleShowSolutionConfirmation}
+     >
+       Want to see another implementation?
+     </button>
+      
+    </div>
         <div    className="steps-container" >
           {steps.map((label, index) => (
             <div
@@ -444,8 +562,11 @@ const BigProject: React.FC = () => {
     left:"-40%"
    }} >Reverse Engineering task</button>
   </Link>
+  
       </div>
+      
     </div>
+      
   );
 };
 

@@ -82,6 +82,28 @@
     cursor: pointer;
   }
   
+  .monaco-editor-container-class {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .run-code-button-class {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  
+  
+
+  .run-code-button-class:hover {
+    background-color: #0056b3;
+  }
+  
   .step.active {
     background-color: #007bff;
     color: #fff;
@@ -114,9 +136,30 @@
     background-color: #007bff;
     color: #fff;
     border: none;
+ 
     border-radius: 10px;
     margin-left: 86%;
     cursor: pointer;
+   
+    transition: opacity 1s ease-in-out;
+  }
+  .show-implementation-button {
+   
+    margin-top: -40%;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+ opacity: 0;
+    border-radius: 10px;
+    margin-left: 86%;
+    cursor: pointer;
+   
+    transition: opacity 1s ease-in-out;
+  }
+  
+  .show-implementation-button.visible {
+    opacity: 1;
   }
   
   .tips-and-tricks-modal {
